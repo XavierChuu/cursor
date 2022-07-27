@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>cursor</title>
 
     <style>
         body {
             cursor: none;
             min-height: 100%;
-            background: white;
+            background: rgb(0, 0, 0);
         }
-        
+
         #myCustomCursor {
             position: fixed;
             width: 60px;
@@ -31,9 +31,6 @@
         }
     </style>
 </head>
-<body>
-    <h1>Hello World</h1>
-</body>
 
 </html>
 
@@ -47,15 +44,15 @@
     }
 
     function initCustomCursor(cursor) {
-        document.body.onmousemove = function(e) {
+        document.body.onmousemove = function (e) {
             cursor.style.setProperty('--x', (e.clientX) + 'px');
             cursor.style.setProperty('--y', (e.clientY) + 'px');
         }
     }
 
-if (window.innerWidth > 1024) {   
-	    createCustomCursor();
-} else {
-console.log('Screen size is smaller then 1024px width')
-}
+    if (window.innerWidth > 1024) {
+        createCustomCursor();
+    } else {
+        console.log('Screen size is smaller then 1024px width')
+    }
 </script>
