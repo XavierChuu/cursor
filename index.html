@@ -13,24 +13,19 @@
             min-height: 100%;
             background: white;
         }
-
-        h1 {
-            font-size: 120px;
-        }
-
+        
         #myCustomCursor {
-            position: absolute;
-            width: 80px;
-            height: 80px;
+            position: fixed;
+            width: 60px;
+            height: 60px;
             background: rgb(255 255 255);
             border-radius: 50%;
             top: var(--y, 0);
             left: var(--x, 0);
             transform: translate(-50%, -50%);
-            z-index: 2;
             mix-blend-mode: difference;
             pointer-events: none;
-            transition-duration: 500ms;
+            transition-duration: 300ms;
             transition-timing-function: ease-out;
             z-index: 99999;
         }
@@ -44,21 +39,12 @@
 
 <script>
     function createCustomCursor() {
-        let cursor = document.getElementById('myCustomCursor');
+        const cursor = document.createElement("div");
+        cursor.setAttribute("id", "myCustomCursor");
+        document.body.appendChild(cursor);
 
-        if (cursor) {
-            console.log('myCustomCursor already exist');
-            //addCursorSpecialEffectToAllPageLinks(cursor);
-        } else {
-            cursor = document.createElement("div");
-            cursor.setAttribute("id", "myCustomCursor");
-            document.body.appendChild(cursor);
-
-            initCustomCursor(cursor);
-            //addCursorSpecialEffectToAllPageLinks(cursor);
-        }
+        initCustomCursor(cursor)
     }
-
 
     function initCustomCursor(cursor) {
         document.body.onmousemove = function(e) {
@@ -67,30 +53,9 @@
         }
     }
 
-    function addCursorSpecialEffectToAllPageLinks(cursor) {
-        var links = document.querySelectorAll("a");
-
-        // This for loop is used to find all the page links and add the "myCursorHoverState" css class to create special effect on hover
-        for (var i = 0; i < links.length; i++) {
-            var link = links[i].getAttribute("href");
-            console.log(link);
-
-            links[i].addEventListener("mouseenter", function(event) {
-                console.log('In');
-                cursor.classList.add("myCursorHoverState");
-            }, false);
-
-            links[i].addEventListener("mouseleave", function(event) {
-                console.log('Out');
-                cursor.classList.remove("myCursorHoverState");
-            }, false);
-        }
-    }
-
 if (window.innerWidth > 1024) {   
-        createCustomCursor();
+	    createCustomCursor();
 } else {
 console.log('Screen size is smaller then 1024px width')
 }
-
 </script>
