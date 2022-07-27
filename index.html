@@ -39,23 +39,53 @@
 
 <script>
     function createCustomCursor() {
-        const cursor = document.createElement("div");
-        cursor.setAttribute("id", "myCustomCursor");
-        document.body.appendChild(cursor);
+        let cursor = document.getElementById('myCustomCursor');
 
-        initCustomCursor(cursor)
+        if (cursor) {
+            console.log('myCustomCursor already exist');
+            //addCursorSpecialEffectToAllPageLinks(cursor);
+        } else {
+            cursor = document.createElement("div");
+            cursor.setAttribute("id", "myCustomCursor");
+            document.body.appendChild(cursor);
+
+            initCustomCursor(cursor);
+            //addCursorSpecialEffectToAllPageLinks(cursor);
+        }
     }
 
+
     function initCustomCursor(cursor) {
-        document.body.onmousemove = function (e) {
+        document.body.onmousemove = function(e) {
             cursor.style.setProperty('--x', (e.clientX) + 'px');
             cursor.style.setProperty('--y', (e.clientY) + 'px');
         }
     }
 
-    if (window.innerWidth > 1024) {
-        createCustomCursor();
-    } else {
-        console.log('Screen size is smaller then 1024px width')
+    function addCursorSpecialEffectToAllPageLinks(cursor) {
+        var links = document.querySelectorAll("a");
+
+        // This for loop is used to find all the page links and add the "myCursorHoverState" css class to create special effect on hover
+        for (var i = 0; i < links.length; i++) {
+            var link = links[i].getAttribute("href");
+            console.log(link);
+
+            links[i].addEventListener("mouseenter", function(event) {
+                console.log('In');
+                cursor.classList.add("myCursorHoverState");
+            }, false);
+
+            links[i].addEventListener("mouseleave", function(event) {
+                console.log('Out');
+                cursor.classList.remove("myCursorHoverState");
+            }, false);
+        }
     }
+
+if (window.innerWidth > 1024) {   
+        createCustomCursor();
+} else {
+console.log('Screen size is smaller then 1024px width')
+}
+
 </script>
